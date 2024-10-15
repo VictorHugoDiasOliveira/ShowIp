@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# Detect the active network interface that has an assigned IP address
+INTERFACE=$(ip -o -4 addr show up | grep -v '127.0.0.1' | awk '{print $2}' | head -n 1)
+
+# Get the IP address of the detected interface
+IP=$(ifconfig $INTERFACE | grep 'inet ' | awk '{print $2}')
+
+# Display the network interface and the IP address
+echo "Interface: ${INTERFACE}"
+echo "IP: ${IP}"
